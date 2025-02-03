@@ -10,17 +10,18 @@ session_start();
     <?php
 
     require("../paspublic/connect.php");
-    $sql = "SELECT T2.Nom,T2.Prenom 
-            FROM Promotions AS T1 Where T1.libelle = ".$_SESSION["promotion"]."
+    $sql = $pdo->prepare("SELECT T2.Nom,T2.Prenom 
+            FROM Promotions AS T1 
             JOIN Etudiant AS T2 ON T1.Identifiant = T2.IdentifiantPromotions
-            ORDER BY T1.Identifiant";
-    if (!$connexion->query($sql)) echo "Pb d'accès au CARNET";
-    else {
-        foreach ($connexion->query($sql) as $row)
-            echo $row['Nom']." ".$row['Prenom']."<br>";
+            Where T1.libelle = :libelle
+            ORDER BY T1.Identifiant");
+    $sql->bindParam(":libelle", $_SESSION["promotion"]);
+    $sql->execute();
+    $result = $sql->fetchAll(PDO::FETCH_ASSOC);
+    foreach ($result as $row) {
+        echo "<p>".$row["Nom"]." ".$row["Prenom"]."</p>";
     }
     ?>
 
 </body>
 </html>
-
