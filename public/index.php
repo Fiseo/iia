@@ -12,7 +12,7 @@ require("../paspublic/connect.php");
             <?php
             $promotions = getPromotion();
             foreach ($promotions as $promotion) {
-                echo $promotion[1];
+                echo "<input name=\"promotion\" type=\"submit\" value=\"".$promotion[1]."\"><br/>\n";
             }
             ?>
         </form>
