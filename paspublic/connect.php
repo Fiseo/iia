@@ -13,3 +13,16 @@ try {
     printf("Échec de la connexion : %s\n", $e->getMessage());
     exit();
 }
+
+function getPromotion(){
+
+    global $pdo;
+    $listPromo = [];
+    $sql = "SELECT * from Promotions";
+    if (!$pdo->query($sql)) echo "Pb d'accès au PROMOTIONS";
+    else {
+        foreach ($pdo->query($sql) as $row)
+            $listPromo[] = $row;
+    }
+    return $listPromo; // $listPromo[0] donne l'id et [1] le libelle
+}
