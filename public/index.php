@@ -7,7 +7,7 @@ session_start();
     </head>
     <body>
     <form action="" method="post" enctype="multipart/form-data">
-            <h1>Liste des pormotions</h1>
+            <h1>Liste des promotions</h1>
             <?php
 
             require("../paspublic/connect.php");
@@ -23,6 +23,6 @@ session_start();
                 }
             ?>
         </form>
-
+    <a href="add-promo.php">Rajouter une promotion</a>
     </body>
 </html>
