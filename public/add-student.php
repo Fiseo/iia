@@ -56,6 +56,7 @@ if (isset($_POST['nom']) && isset($_POST['prenom']) && $_POST['nom'] != "" && $_
     }
 
     $sql->execute();
+    header("Location: index.php");
 
 } else {
     echo "veuillez remplir tous les champs";
