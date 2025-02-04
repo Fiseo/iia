@@ -19,10 +19,8 @@
 
 <?php
 require("../paspublic/connect.php");
-$sql = $pdo ->prepare("INSERT INTO Promotions(libelle) VALUES (:libelle)");
 if (isset($_POST['promotion'])){
-$sql->bindParam(":libelle", $_POST['promotion']);
-$sql->execute();
-header('location:index.php');
+    addPromotion($_POST['promotion']);
+    header('location:index.php');
 }
 ?>
