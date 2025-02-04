@@ -13,7 +13,7 @@
         <input type="submit" value="Valider">
     </div>
 </form>
-<a href="add-promo.php">Retour au choix de promotion</a>
+<a href="index.php">Retour au choix de promotion</a>
 </body>
 </html>
 

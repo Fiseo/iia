@@ -17,6 +17,7 @@ require("../paspublic/connect.php");
             ?>
         </form>
     <a href="add-promo.php">Rajouter une promotion</a>
+    <a href="add-student.php">Rajouter un étudiant</a>
     </body>
 </html>
 <?php
