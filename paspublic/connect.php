@@ -91,3 +91,9 @@ function deleteEtudiant($id){
     $sql->bindParam(":id", $id);
     $sql->execute();
 }
+function deletePromotion($id){
+    global $pdo;
+    $sql = $pdo ->prepare("DELETE FROM Promotions WHERE Identifiant = :id;");
+    $sql->bindParam(":id", $id);
+    $sql->execute();
+}
