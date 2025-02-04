@@ -29,7 +29,7 @@ function getPromotion(){
 
 function getStudentsByPromotion($promotion){
     global $pdo;
-    $sql = $pdo->prepare("SELECT T2.Nom,T2.Prenom 
+    $sql = $pdo->prepare("SELECT T2.Nom,T2.Prenom, T2.Identifiant
             FROM Promotions AS T1 
             JOIN Etudiant AS T2 ON T1.Identifiant = T2.IdentifiantPromotions
             Where T1.libelle = :libelle
@@ -76,5 +76,10 @@ function addEtudiant($nom, $prenom, $promo = null){
         echo "Veuillez remplir les champs";
     }
 }
-/*
- */
+
+function deleteEtudiant($id){
+    global $pdo;
+    $sql = $pdo ->prepare("DELETE FROM Etudiant WHERE Identifiant = :id");
+    $sql->bindParam(":id", $id);
+    $sql->execute();
+}

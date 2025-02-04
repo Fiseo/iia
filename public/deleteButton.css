@@ -1,0 +1,21 @@
+.invisible {
+    position: absolute;
+    z-index: 2;
+    color: transparent;
+    background-color: transparent;
+    border-color: transparent;
+    width: 100px;
+
+    /* Autres styles CSS */
+}
+
+.visible {
+    position: absolute;
+    z-index: 1;
+    width: 100px;
+    /* Autres styles CSS */
+}
+
+.button {
+    position: relative;
+}

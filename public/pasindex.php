@@ -4,17 +4,22 @@ session_start();
 <html>
 <head>
     <title>Gestion de l'IIA</title>
+    <link rel="stylesheet" href="deleteButton.css">
 </head>
 <body>
     <h1>Liste des élèves de <?php echo $_SESSION["promotion"]; ?></h1>
-    <?php
-    if (isset($_SESSION["promotion"])){
-        require("../paspublic/connect.php");
-        foreach ($result = getStudentsByPromotion($_SESSION["promotion"]) as $row) {
-            echo "<p>".$row["Nom"]." ".$row["Prenom"]."</p>";
+    <form action="studentDelete.php" method="post" enctype="multipart/form-data">
+        <?php
+        if (isset($_SESSION["promotion"])){
+            require("../paspublic/connect.php");
+            foreach ($result = getStudentsByPromotion($_SESSION["promotion"]) as $key => $row) {
+                echo    "<p>".$row["Nom"]." ".$row["Prenom"]."</p>
+                        <div class = \"button\"><input class=\"visible\" type=\"submit\" value=\"Supprimer\">
+                        <input class=\"invisible\" type=\"submit\" name=\"id\" value=\"".$key."\"></div><br>";
+            }
         }
-    }
-    ?>
-
+        ?>
+    </form>
+    <a href="index.php">Retour au choix de promotion</a>
 </body>
 </html>
