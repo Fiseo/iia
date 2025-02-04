@@ -16,6 +16,10 @@
     /* Autres styles CSS */
 }
 
+.visible:hover{
+    background-color: #e0e0e0;
+}
+
 .button {
     position: relative;
 }

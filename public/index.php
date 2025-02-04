@@ -12,9 +12,12 @@ require("../paspublic/connect.php");
             <?php
             $promotions = getPromotion();
             foreach ($promotions as $promotion) {
-                echo "<input name=\"promotion\" type=\"submit\" value=\"".$promotion[1]."\"><br/>\n";
+                echo "<input class=\"visible\" name=\"promotion\" type=\"submit\" value=\"".$promotion[1]."\"><br/>\n";
             }
             ?>
+            <div class = \"button\">
+                <input class="visible" name="null" type="submit" value="Futur étudiant"">
+            </div><br/>
         </form>
     <a href="add-promo.php">Rajouter une promotion</a><br/>
     <a href="add-student.php">Rajouter un étudiant</a>
@@ -23,6 +26,9 @@ require("../paspublic/connect.php");
 <?php
 if (isset($_POST['promotion'])){
     $_SESSION['promotion'] = $_POST['promotion'];
+    header("Location: pasindex.php");
+}elseif (isset($_POST['null'])){
+    $_SESSION['promotion'] = "null";
     header("Location: pasindex.php");
 }
 ?>

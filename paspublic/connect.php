@@ -18,7 +18,7 @@ function getPromotion(){
 
     global $pdo;
     $listPromo = [];
-    $sql = "SELECT * from Promotions";
+    $sql = "SELECT * from Promotions;";
     if (!$pdo->query($sql)) echo "Pb d'accès au PROMOTIONS";
     else {
         foreach ($pdo->query($sql) as $row)
@@ -29,19 +29,27 @@ function getPromotion(){
 
 function getStudentsByPromotion($promotion){
     global $pdo;
-    $sql = $pdo->prepare("SELECT T2.Nom,T2.Prenom, T2.Identifiant
+    if($promotion == null){
+        $sql = $pdo->prepare("SELECT Nom, Prenom, Identifiant
+            FROM Etudiant
+            WHERE IdentifiantPromotions IS NULL
+            ORDER BY Identifiant;");
+        // SELECT Nom, Prenom, Identifiant FROM Etudiant WHERE IdentifiantPromotions IS NULL ORDER BY Identifiant;
+    }else{
+        $sql = $pdo->prepare("SELECT T2.Nom,T2.Prenom, T2.Identifiant
             FROM Promotions AS T1 
             JOIN Etudiant AS T2 ON T1.Identifiant = T2.IdentifiantPromotions
             Where T1.libelle = :libelle
-            ORDER BY T1.Identifiant");
-    $sql->bindParam(":libelle", $promotion);
+            ORDER BY T1.Identifiant;");
+        $sql->bindParam(":libelle", $promotion);
+    }
     $sql->execute();
     $result = $sql->fetchAll(PDO::FETCH_ASSOC);
     return $result;
 }
 function addPromotion($libelle){
     global $pdo;
-    $sql = $pdo ->prepare("INSERT INTO Promotions(libelle) VALUES (:libelle)");
+    $sql = $pdo ->prepare("INSERT INTO Promotions(libelle) VALUES (:libelle);");
     $sql->bindParam(":libelle", $libelle);
     $sql->execute();
 }
@@ -79,7 +87,7 @@ function addEtudiant($nom, $prenom, $promo = null){
 
 function deleteEtudiant($id){
     global $pdo;
-    $sql = $pdo ->prepare("DELETE FROM Etudiant WHERE Identifiant = :id");
+    $sql = $pdo ->prepare("DELETE FROM Etudiant WHERE Identifiant = :id;");
     $sql->bindParam(":id", $id);
     $sql->execute();
 }

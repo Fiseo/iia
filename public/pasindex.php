@@ -1,5 +1,12 @@
 <?php
 session_start();
+if (!isset($_SESSION["promotion"])){
+    header("Location: index.php");
+}elseif ($_SESSION["promotion"] == "null"){
+    $libelle = "Futurs étudiants";
+}else{
+    $libelle = "élèves de ".$_SESSION["promotion"];
+}
 ?>
 <html>
 <head>
@@ -7,10 +14,13 @@ session_start();
     <link rel="stylesheet" href="deleteButton.css">
 </head>
 <body>
-    <h1>Liste des élèves de <?php echo $_SESSION["promotion"]; ?></h1>
+    <h1>Liste des <?php echo $libelle; ?></h1>
     <form action="studentDelete.php" method="post" enctype="multipart/form-data">
         <?php
         if (isset($_SESSION["promotion"])){
+            if ($_SESSION["promotion"] == "null"){
+                $_SESSION["promotion"] = null;
+            }
             require("../paspublic/connect.php");
             foreach ($result = getStudentsByPromotion($_SESSION["promotion"]) as $key => $row) {
                 echo    "<p>".$row["Nom"]." ".$row["Prenom"]."</p>
